@@ -44,7 +44,7 @@
         android:id="@+id/sign_up_button_login_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/signup_button_label"
+        android:text="@string/sign_up_button_label"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>

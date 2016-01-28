@@ -1,4 +1,7 @@
 <resources>
+    <string name="parse_app_id">6v7Nf8xLQoV8Rspq3g3evuXZTKqixOoaNM443DXZ</string>
+    <string name="parse_client_key">MmOyTShmq4oI6lTmzm7u4L7rl6GUbjlPW8ppu5vy</string>
+
     <string name="app_name">Self-Destructing App</string>
     <string name="action_settings">Settings</string>
     <string name="title_section1">Section 1</string>
@@ -8,8 +11,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
-    <string name="login_button_label">Login</string>
-    <string name="sign_up_text">Sign Up!</string>
-    <string name="signup_button_label">Signup</string>
+    <string name="sign_up_button_label">Sign Up</string>
     <string name="email_text_hint">Email Address</string>
+
+    <string name="sign_up_error_message">And you fucked up</string>
+    <string name="sign_up_error_title">Something went wrong…</string>
+    <string name="login_error_message">And you fucked up</string>
+    <string name="login_error_title">Something went wrong…</string>
+    <string name="login_button_label">Login</string>
 </resources>
