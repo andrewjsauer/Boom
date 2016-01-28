@@ -1,4 +1,4 @@
-package sauerapps.self_destructingapp;
+package sauerapps.self_destructingapp.View;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +15,7 @@ import com.parse.SignUpCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import sauerapps.self_destructingapp.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

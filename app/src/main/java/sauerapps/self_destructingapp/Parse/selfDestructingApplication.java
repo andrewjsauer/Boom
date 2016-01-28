@@ -1,4 +1,4 @@
-package sauerapps.self_destructingapp;
+package sauerapps.self_destructingapp.Parse;
 
 import android.app.Application;
 
