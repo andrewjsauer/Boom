@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import sauerapps.self_destructingapp.View.Tab1;
-import sauerapps.self_destructingapp.View.Tab2;
+import sauerapps.self_destructingapp.View.HomeTab;
+import sauerapps.self_destructingapp.View.FriendsTab;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -29,12 +29,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0) // if the position is 0 we are returning the First tab
         {
-            Tab1 tab1 = new Tab1();
+            HomeTab tab1 = new HomeTab();
             return tab1;
         }
         else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            Tab2 tab2 = new Tab2();
+            FriendsTab tab2 = new FriendsTab();
             return tab2;
         }
 

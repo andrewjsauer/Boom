@@ -15,7 +15,9 @@ package sauerapps.self_destructingapp.View;
     import android.widget.LinearLayout;
     import android.widget.TextView;
 
-    /**
+    import sauerapps.self_destructingapp.R;
+
+/**
      * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
      * the user's scroll progress.
      * <p>
@@ -56,7 +58,7 @@ package sauerapps.self_destructingapp.View;
         private boolean mDistributeEvenly;
 
         private ViewPager mViewPager;
-        private SparseArray<String> mContentDescriptions = new SparseArray<String>();
+        private SparseArray<String> mContentDescriptions = new SparseArray<>();
         private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
         private final SlidingTabStrip mTabStrip;
@@ -195,6 +197,7 @@ package sauerapps.self_destructingapp.View;
                     lp.weight = 1;
                 }
 
+                assert tabTitleView != null;
                 tabTitleView.setText(adapter.getPageTitle(i));
                 tabView.setOnClickListener(tabClickListener);
                 String desc = mContentDescriptions.get(i, null);
@@ -206,8 +209,13 @@ package sauerapps.self_destructingapp.View;
                 if (i == mViewPager.getCurrentItem()) {
                     tabView.setSelected(true);
                 }
+                tabTitleView.setTextColor(getResources().getColorStateList(R.color.selector));
+                tabTitleView.setTextSize(14);
             }
         }
+
+
+
 
         public void setContentDescription(int i, String desc) {
             mContentDescriptions.put(i, desc);

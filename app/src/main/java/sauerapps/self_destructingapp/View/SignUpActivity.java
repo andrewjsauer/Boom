@@ -54,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
                     dialog.show();
                 }
                 else {
-                    mProgressBar.setVisibility(View.INVISIBLE);
+                    mProgressBar.setVisibility(View.VISIBLE);
                     ParseUser newUser = new ParseUser();
 
                     newUser.setEmail(email);
@@ -65,6 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
+                                mProgressBar.setVisibility(View.INVISIBLE);
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

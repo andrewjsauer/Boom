@@ -23,8 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     @InjectView(R.id.sign_up_button_login_screen) protected Button mSignUpButton;
     @InjectView(R.id.user_name_input_login_screen) protected EditText mUserName;
     @InjectView(R.id.password_input_login_screen) protected EditText mPassword;
-    @InjectView(R.id.login_screen_button) protected EditText mLoginButton;
-    @InjectView(R.id.progressBarSignUpPage) protected ProgressBar mProgressBar;
+    @InjectView(R.id.login_screen_button) protected Button mLoginButton;
+    @InjectView(R.id.progressBarLogin) protected ProgressBar mProgressBar;
 
 
     @Override
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.INVISIBLE);
 
                 String username = mUserName.getText().toString();
                 String password = mPassword.getText().toString();
@@ -62,11 +62,11 @@ public class LoginActivity extends AppCompatActivity {
                     dialog.show();
                 }
                 else {
-                    mProgressBar.setVisibility(View.INVISIBLE);
-
+                    mProgressBar.setVisibility(View.VISIBLE);
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
+                            mProgressBar.setVisibility(View.INVISIBLE);
                             if (e == null) {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -90,12 +90,4 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
-    }
-
 }
