@@ -2,9 +2,7 @@ package sauerapps.self_destructingapp.View;
 
 import android.app.ListActivity;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,7 +10,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
@@ -24,6 +21,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import sauerapps.self_destructingapp.R;
+import sauerapps.self_destructingapp.Utils.ParseConstants;
 
 public class EditFriendsActivity extends ListActivity {
 
@@ -70,7 +68,7 @@ public class EditFriendsActivity extends ListActivity {
                         i++;
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditFriendsActivity.this,
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(EditFriendsActivity.this,
                             android.R.layout.simple_list_item_checked, usernames);
                     setListAdapter(adapter);
 

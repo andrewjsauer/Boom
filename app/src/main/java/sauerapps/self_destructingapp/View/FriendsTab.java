@@ -3,14 +3,13 @@ package sauerapps.self_destructingapp.View;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -20,21 +19,29 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import sauerapps.self_destructingapp.Adapters.UserAdapter;
 import sauerapps.self_destructingapp.R;
+import sauerapps.self_destructingapp.Utils.ParseConstants;
 
-public class FriendsTab extends ListFragment {
+public class FriendsTab extends Fragment {
 
     private static final String TAG = FriendsTab.class.getSimpleName();
 
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
+    protected GridView mGridView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.friends_tab,container,false);
+        View v = inflater.inflate(R.layout.user_grid, container, false);
+
+        mGridView = (GridView) v.findViewById(R.id.gridView);
+
+        TextView emptyTextView = (TextView) v.findViewById(android.R.id.empty);
+        mGridView.setEmptyView(emptyTextView);
+
+
         return v;
     }
 
@@ -52,8 +59,6 @@ public class FriendsTab extends ListFragment {
             public void done(List<ParseUser> friends, ParseException e) {
 
                 if (e == null) {
-
-
                 mFriends = friends;
 
                 String[] usernames = new String[mFriends.size()];
@@ -62,13 +67,17 @@ public class FriendsTab extends ListFragment {
                     usernames[i] = user.getUsername();
                     i++;
                 }
+                    if (mGridView.getAdapter() == null) {
+                        UserAdapter adapter = new UserAdapter(getContext(), mFriends);
+                        mGridView.setAdapter(adapter);
+                    } else {
+                        ((UserAdapter) mGridView.getAdapter()).refill(mFriends);
+                    }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getListView().getContext(),
-                        android.R.layout.simple_list_item_1, usernames);
-                setListAdapter(adapter);
+
                 }
                 else {
-                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getListView().getContext());
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                     alertBuilder.setMessage(e.getMessage())
                             .setTitle(R.string.edit_friends_error_message)
                             .setPositiveButton(android.R.string.ok, null);

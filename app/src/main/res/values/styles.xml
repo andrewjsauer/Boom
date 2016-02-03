@@ -1,13 +1,81 @@
 <resources>
 
-    <!-- Base application theme. -->
+    Base application theme.
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/ColorPrimary</item>
-        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+
+        <item name="android:listViewStyle">@style/AppTheme.LightPurpleBackgroundStyle</item>
+        <item name="android:gridViewStyle">@style/AppTheme.LightPurpleBackgroundStyle.GridView
+        </item>
     </style>
+
+    <style name="AppTheme.LightPurpleBackgroundStyle">
+        <item name="android:padding">@dimen/user_grid_spacing</item>
+    </style>
+
+    <style name="AppTheme.LightPurpleBackgroundStyle.GridView">
+        <item name="android:background">@color/light_purple_background</item>
+        <item name="android:divider">@null</item>
+    </style>
+
+
+    <style name="AuthBackground">
+
+        <item name="android:background">@drawable/background_fill</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:scaleType">fitStart</item>
+        <item name="android:src">@drawable/background</item>
+
+    </style>
+
+    <style name="AuthTitle">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:text">@string/app_name</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="AuthSubTitle" parent="AuthTitle">
+
+        <item name="android:layout_below">@+id/title</item>
+        <item name="android:text">@string/subtitle_login_page</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_alignParentTop">false</item>
+        <item name="android:layout_marginTop">0dp</item>
+
+    </style>
+
+    <style name="AuthFieldContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_below">@id/subTitle</item>
+        <item name="android:layout_marginTop">@dimen/login_vertical_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:paddingLeft">@dimen/login_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/login_horizontal_padding</item>
+        <item name="android:paddingTop">@dimen/login_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/login_vertical_padding</item>
+
+    </style>
+
+    <!--<style name="AppTheme" parent="@style/_AppTheme"/>-->
+
+    <!--<style name="_AppTheme" parent="android:Theme.Holo.Light">-->
+
+
+    <!--</style>-->
 
 </resources>

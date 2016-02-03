@@ -1,4 +1,4 @@
-package sauerapps.self_destructingapp.View;
+package sauerapps.self_destructingapp.Utils;
 
         import android.content.Context;
         import android.graphics.Canvas;

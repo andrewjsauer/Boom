@@ -25,6 +25,9 @@ public class SignUpActivity extends AppCompatActivity {
     @InjectView(R.id.email_input_field_sign_up_screen) protected EditText mEmail;
     @InjectView(R.id.sign_up_button_sign_up_screen) protected Button mSignUpButton;
     @InjectView(R.id.progressBarSignUpPage) protected ProgressBar mProgressBar;
+    @InjectView(R.id.sign_up_cancel_button)
+    protected Button mCancelButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = alertBuilder.create();
                     dialog.show();
-                }
-                else {
+                } else {
                     mProgressBar.setVisibility(View.VISIBLE);
                     ParseUser newUser = new ParseUser();
 
@@ -70,8 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SignUpActivity.this);
                                 alertBuilder.setMessage(e.getMessage())
                                         .setTitle(R.string.sign_up_error_title)
@@ -83,6 +84,14 @@ public class SignUpActivity extends AppCompatActivity {
                     });
 
                 }
+            }
+        });
+
+
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

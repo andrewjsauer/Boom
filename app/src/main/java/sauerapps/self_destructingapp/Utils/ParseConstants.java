@@ -1,8 +1,5 @@
-package sauerapps.self_destructingapp.View;
+package sauerapps.self_destructingapp.Utils;
 
-/**
- * Created by andrewsauer on 1/29/16.
- */
 public final class ParseConstants {
 
     public static final String CLASS_MESSGES = "Messages";

@@ -14,17 +14,9 @@ import android.view.Menu;
 
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -33,13 +25,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import sauerapps.self_destructingapp.Adapters.ViewPagerAdapter;
 import sauerapps.self_destructingapp.R;
+import sauerapps.self_destructingapp.Utils.ParseConstants;
+import sauerapps.self_destructingapp.Utils.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -181,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
         // Creating The Toolbar and setting it as the Toolbar for the activity
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.text_color));
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
         ParseUser currentUser = ParseUser.getCurrentUser();
