@@ -15,6 +15,7 @@ import com.parse.SignUpCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import sauerapps.self_destructingapp.Parse.selfDestructingApplication;
 import sauerapps.self_destructingapp.R;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -67,6 +68,8 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
+                                selfDestructingApplication.updateParseInstallation(ParseUser.getCurrentUser());
+
                                 mProgressBar.setVisibility(View.INVISIBLE);
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

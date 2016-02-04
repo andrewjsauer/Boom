@@ -30,6 +30,7 @@
     <string name="success_toast">Success!</string>
     <string name="subtitle_login_page">a fuck you project..</string>
     <string name="sign_up_cancel_label">CANCEL</string>
+    <string name="push_notification">"New notification from %s!"</string>
 
     <string-array name="camera_choices">
         <item>Take Picture</item>

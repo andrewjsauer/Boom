@@ -45,18 +45,15 @@ public class MainActivity extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGE = 4;
     public static final int MEDIA_TYPE_VIDEO = 5;
 
-    public static final int FILE_SIZE_LIMIT = 1024*1024*10; // 10 MB
+    public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10; // 10 MB
 
     protected Uri mMediaUri;
 
 
     protected Toolbar toolbar;
-    protected ViewPager pager;
-    protected ViewPagerAdapter adapter;
     protected SlidingTabLayout tabs;
     protected CharSequence Titles[] = {"Home", "Friends"};
     protected int Numboftabs = 2;
-
 
 
     protected DialogInterface.OnClickListener mDialogListener = new DialogInterface.OnClickListener() {
@@ -69,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (mMediaUri == null) {
                         Toast.makeText(MainActivity.this, R.string.external_storage_error_message, Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                         startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
                     }
@@ -83,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
                     if (mMediaUri == null) {
                         Toast.makeText(MainActivity.this, R.string.external_storage_error_message, Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                         videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
                         videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
@@ -107,62 +102,63 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-    };
 
-    private Uri getOutputMediaFileUri(int mediaType) {
 
-        if (isExternalStorageAvailable()) {
+        private Uri getOutputMediaFileUri(int mediaType) {
 
-            // 1. Get external storage directory
-            String appName = MainActivity.this.getString(R.string.app_name);
-            File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory
-                    (Environment.DIRECTORY_PICTURES), appName);
+            if (isExternalStorageAvailable()) {
 
-            // 2. Create subdirectory
-            if (!mediaStorageDir.exists()) {
-                if (!mediaStorageDir.mkdir()) {
-                    Log.e(TAG, "Failed to make directory");
+                // 1. Get external storage directory
+                String appName = MainActivity.this.getString(R.string.app_name);
+                File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory
+                        (Environment.DIRECTORY_PICTURES), appName);
+
+                // 2. Create subdirectory
+                if (!mediaStorageDir.exists()) {
+                    if (!mediaStorageDir.mkdir()) {
+                        Log.e(TAG, "Failed to make directory");
+                        return null;
+                    }
+                }
+
+                // 3. Create file name
+                // 4. Create the file
+                File mediaFile;
+                Date now = new Date();
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(now);
+
+                String path = mediaStorageDir.getPath() + File.separator;
+                if (mediaType == MEDIA_TYPE_IMAGE) {
+                    mediaFile = new File(path + "IMG_" + timeStamp + ".jpg");
+                } else if (mediaType == MEDIA_TYPE_VIDEO) {
+                    mediaFile = new File(path + "VID_" + timeStamp + ".mp4");
+                } else {
                     return null;
                 }
-            }
 
-            // 3. Create file name
-            // 4. Create the file
-            File mediaFile;
-            Date now = new Date();
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(now);
+                Log.d(TAG, "File: " + Uri.fromFile(mediaFile));
 
-            String path = mediaStorageDir.getPath() + File.separator;
-            if (mediaType == MEDIA_TYPE_IMAGE) {
-                mediaFile = new File(path + "IMG_" + timeStamp + ".jpg");
-            }
-            else if (mediaType == MEDIA_TYPE_VIDEO){
-                mediaFile = new File(path + "VID_" + timeStamp + ".mp4");
-            }
-            else {
+                // 5. Return the files URI
+                return Uri.fromFile(mediaFile);
+            } else {
                 return null;
             }
-
-            Log.d(TAG, "File: " + Uri.fromFile(mediaFile));
-
-            // 5. Return the files URI
-            return Uri.fromFile(mediaFile);
         }
-        else {
-            return null;
-        }
-    }
 
-    private boolean isExternalStorageAvailable() {
-        String state = Environment.getExternalStorageState();
+        private boolean isExternalStorageAvailable() {
+            String state = Environment.getExternalStorageState();
 
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            return true;
+            if (state.equals(Environment.MEDIA_MOUNTED)) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else {
-            return false;
-        }
-    }
+    };
+
+    protected ViewPagerAdapter adapter;
+    protected ViewPager pager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.i(TAG, currentUser.getUsername());
         }
-
-
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
@@ -223,12 +217,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
             // add to gallery
-
             if (requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
                 if (data == null) {
                     Toast.makeText(MainActivity.this, R.string.general_error, Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     mMediaUri = data.getData();
                 }
 
@@ -261,14 +253,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-            }
-            else {
+            } else {
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 mediaScanIntent.setData(mMediaUri);
                 sendBroadcast(mediaScanIntent);
             }
-        }
-        else if (resultCode != RESULT_CANCELED) {
+        } else if (resultCode != RESULT_CANCELED) {
             Toast.makeText(MainActivity.this, R.string.general_error, Toast.LENGTH_SHORT).show();
         }
 
@@ -279,8 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST) {
             fileType = ParseConstants.TYPE_IMAGE;
-        }
-        else {
+        } else {
             fileType = ParseConstants.TYPE_VIDEO;
         }
         recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
@@ -324,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
         }
-
 
 
         return super.onOptionsItemSelected(item);

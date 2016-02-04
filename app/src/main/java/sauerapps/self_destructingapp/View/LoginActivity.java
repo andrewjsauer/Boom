@@ -16,6 +16,7 @@ import com.parse.ParseUser;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import sauerapps.self_destructingapp.Parse.selfDestructingApplication;
 import sauerapps.self_destructingapp.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -68,6 +69,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void done(ParseUser user, ParseException e) {
                             mProgressBar.setVisibility(View.INVISIBLE);
                             if (e == null) {
+
+                                selfDestructingApplication.updateParseInstallation(user);
+
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

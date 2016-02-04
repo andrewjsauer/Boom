@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -58,19 +57,18 @@ public class HomeTab extends ListFragment {
     }
 
     private void retrieveMessages() {
-        ParseQuery<ParseObject> query = new ParseQuery<>(ParseConstants.CLASS_MESSGES);
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseConstants.CLASS_MESSAGES);
         query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId());
         query.addDescendingOrder(ParseConstants.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> messages, ParseException e) {
-
                 if (mSwipeRefreshLayout.isRefreshing()) {
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
 
                 if (e == null) {
-
+                    // We found messages!
                     mMessages = messages;
 
                     String[] usernames = new String[mMessages.size()];
@@ -79,7 +77,6 @@ public class HomeTab extends ListFragment {
                         usernames[i] = message.getString(ParseConstants.KEY_SENDER_NAME);
                         i++;
                     }
-
                     if (getListView().getAdapter() == null) {
                         MessageAdapter adapter = new MessageAdapter(
                                 getListView().getContext(),
@@ -87,15 +84,14 @@ public class HomeTab extends ListFragment {
                         setListAdapter(adapter);
                     }
                     else {
+                        // refill the adapter!
                         ((MessageAdapter) getListView().getAdapter()).refill(mMessages);
-
                     }
-
                 }
             }
         });
-    }
 
+    }
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -106,35 +102,34 @@ public class HomeTab extends ListFragment {
         Uri fileUri = Uri.parse(file.getUrl());
 
         if (messageType.equals(ParseConstants.TYPE_IMAGE)) {
-            // view photo
+            // view the image
             Intent intent = new Intent(getActivity(), ViewImageActivity.class);
             intent.setData(fileUri);
             startActivity(intent);
         }
         else {
-            // view video
+            // view the video
             Intent intent = new Intent(Intent.ACTION_VIEW, fileUri);
             intent.setDataAndType(fileUri, "video/*");
             startActivity(intent);
         }
 
-        // delete
+        // Delete it!
         List<String> ids = message.getList(ParseConstants.KEY_RECIPIENT_IDS);
 
         if (ids.size() == 1) {
-            // last recipient, delete all
+            // last recipient - delete the whole thing!
             message.deleteInBackground();
         }
         else {
-            // remove recipient and save
+            // remove the recipient and save
             ids.remove(ParseUser.getCurrentUser().getObjectId());
 
-            ArrayList<String> idsToRemove = new ArrayList<>();
+            ArrayList<String> idsToRemove = new ArrayList<String>();
             idsToRemove.add(ParseUser.getCurrentUser().getObjectId());
+
             message.removeAll(ParseConstants.KEY_RECIPIENT_IDS, idsToRemove);
             message.saveInBackground();
         }
-
-
     }
 }

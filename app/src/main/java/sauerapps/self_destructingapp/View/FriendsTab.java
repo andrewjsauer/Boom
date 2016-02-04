@@ -52,43 +52,43 @@ public class FriendsTab extends Fragment {
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
+        getActivity().setProgressBarIndeterminateVisibility(true);
+
         ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
         query.addAscendingOrder(ParseConstants.KEY_USERNAME);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
+                getActivity().setProgressBarIndeterminateVisibility(false);
 
                 if (e == null) {
-                mFriends = friends;
+                    mFriends = friends;
 
-                String[] usernames = new String[mFriends.size()];
-                int i = 0;
-                for (ParseUser user : mFriends) {
-                    usernames[i] = user.getUsername();
-                    i++;
-                }
+                    String[] usernames = new String[mFriends.size()];
+                    int i = 0;
+                    for (ParseUser user : mFriends) {
+                        usernames[i] = user.getUsername();
+                        i++;
+                    }
                     if (mGridView.getAdapter() == null) {
-                        UserAdapter adapter = new UserAdapter(getContext(), mFriends);
+                        UserAdapter adapter = new UserAdapter(getActivity(), mFriends);
                         mGridView.setAdapter(adapter);
                     } else {
                         ((UserAdapter) mGridView.getAdapter()).refill(mFriends);
                     }
-
-
                 }
                 else {
-                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
-                    alertBuilder.setMessage(e.getMessage())
-                            .setTitle(R.string.edit_friends_error_message)
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = alertBuilder.create();
-                    dialog.show();
                     Log.e(TAG, e.getMessage());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage(e.getMessage())
+                            .setTitle(R.string.general_error)
+                            .setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             }
         });
     }
-
 
 
     }
