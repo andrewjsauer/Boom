@@ -2,7 +2,7 @@
     <string name="parse_app_id">6v7Nf8xLQoV8Rspq3g3evuXZTKqixOoaNM443DXZ</string>
     <string name="parse_client_key">MmOyTShmq4oI6lTmzm7u4L7rl6GUbjlPW8ppu5vy</string>
 
-    <string name="app_name">Boom Bitch</string>
+    <string name="app_name">Boom</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="hello_world">Hello world!</string>
@@ -28,7 +28,7 @@
     <string name="recipients_friend_list">Choose some friends first!</string>
     <string name="recipients_send_label">Send</string>
     <string name="success_toast">Success!</string>
-    <string name="subtitle_login_page">a fuck you project..</string>
+    <string name="subtitle_login_page">a self-destructing messaging app</string>
     <string name="sign_up_cancel_label">CANCEL</string>
     <string name="push_notification">"New notification from %s!"</string>
 

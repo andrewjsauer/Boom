@@ -28,4 +28,5 @@ dependencies {
     compile 'com.parse:parse-android:1.+'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile files('/Users/andrewsauer/Desktop/Programming/Android Projects/Self-DestructingApp2/libs/commons-io-2.4.jar')
+    compile files('/Users/andrewsauer/Desktop/Programming/Android Projects/Projects/Self-DestructingApp2/libs/commons-io-2.4.jar')
 }

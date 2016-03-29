@@ -56,6 +56,7 @@ public class HomeTab extends ListFragment {
         retrieveMessages();
     }
 
+
     private void retrieveMessages() {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseConstants.CLASS_MESSAGES);
         query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId());
@@ -133,3 +134,6 @@ public class HomeTab extends ListFragment {
         }
     }
 }
+
+// TODO Back button within Edit and Friends
+// TODO Parse issue, images from other Users are not showing up, but images from current user are.
